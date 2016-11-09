@@ -1,37 +1,34 @@
-body{
+body {
 	font-family:"Time New Roman", Georgia, Times, serif;
 	width:500px;
 	font-size:16px;
 	border:1px solid #0033FF;
 	padding:1px;
 }
-.player-profile{
+.player-profile {
 	font-family:"Time New Roman";
 	height:150px;
 	posittion:relative;
 }
-.player-profile p{
-	//left:100px;
-}
-.title{
+
+.title {
 	width:500px;
 	height:20px;
-	background:url("images/title_bg.gif");
+	background:url("../images/title_bg.gif");
 	font-weight:bold;
 }
-.title p{
+.title p {
 	margin-top:0px;
-	margin-left:5px;
 	font-size:16px;
 	line-height:1.3em;
 }
-.player-profile-avatar{
-	background:url("images/Avatar.gif");
+.player-profile-avatar {
+	background:url("../images/Avatar.gif");
 	width:120px;
 	height:120px;
 	float:left;
 }
-.player-profile-content{
+.player-profile-content {
 	font-family:Georgia;
 	float:right;
 	width:370px;
@@ -39,10 +36,8 @@ body{
 	line-height:0.3em;
 	overflow:scroll;
 }
-.facts{
 
-}
-.facts-title{
+.facts-title {
 	font-family:"Time New Roman";
 	margin-top:0px;
 	margin-left:5px;
@@ -50,41 +45,44 @@ body{
 	line-height:1.3em;
 	font-weight:bold;
 }
-.facts-content{
+.facts-content {
 	font-family:Georgia;
 	font-size:1em;
 }
-.facts-content ul{
-	list-style:inside url("images/stars.gif")
+.facts-content ul {
+	list-style:inside url("../images/stars.gif")
 }
-.facts-content li{
+.facts-content li {
 	text-indent:10px;
-	margin-top:10px;
 	margin-left:-10px;
 }
-.comment{
+.comment {
 	font-family:"Time new roman";
 	font-size:14px;
 	padding:0;
 	
 }
-.comment-content{
+.comment-content {
 	background-color:#ECECEC;
 	padding:0.1em;
 	line-height:0.3em;
 	min-height:3em;
 	posittion:relative;
 }
-.comment-info{
-	background: url(images/comment_bg.gif) no-repeat left top;
+.comment-info {
+	background: url(../images/comment_bg.gif) no-repeat left top;
 	font-family:Georgia;
 	margin-left:30px;
-	padding-left:60px;
+	padding-left:40px;
 	margin-top:-1em;
+	margin-bottom: -1em;
 	posittion:absolute;
 }
+.comment-info a {
+	text-decoration:none;
+}
 
-.your-comment-info{
+.your-comment-info {
 	text-align:justify;
 	padding: 5px;
 	margin:0 auto;
@@ -95,22 +93,22 @@ body{
 	align-items:center;
 	-webkit-flex-align:center;
 }
-.your-comment-info .title{
+.your-comment-info .title {
 	text-align:center;
 	text-weight:bold;
 	background-image:none;
 }
 
-.label{
+.label {
 	margin:auto;
-	width:30%;
+	width:25%;
 	float: left;
 }
 .input {
 	float:left;
-    width: 69%;
+    	width: 69%;
 }
-textarea{
+textarea {
 	margin:auto;
 	width:100%;
 	height:80px;
