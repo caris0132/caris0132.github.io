@@ -1,0 +1,58 @@
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	
+}
+.title > p {
+	font-weight:bolder;
+	font-size:12px;
+	-webkit-margin-after: 0;
+	margin-left:5px;
+}
+.container {
+	background-color:#e6f3fb;
+	width:400px;
+	height:800px;
+}
+.blogroll {
+	font-size:12px;
+	background-color:white;
+	border-top:2px solid #ffa500;
+	margin:0 5px;
+}
+
+.new-info {
+	overflow:hidden;
+}
+.new-info img {
+	margin:5px;
+	float:left;
+    	width: 200px;
+}
+.older-info ul{
+	list-style-type:none;
+	padding-left:0px;
+	
+}
+.older-info ul li {
+	background-color:#faf0bf;
+	margin:2px;
+	padding:1em 5px;
+}
+.older-info a {
+	color:#0a6395;
+	text-decoration:none;
+}
+.older-info ul li span {
+	font-weight: bold;
+}
+.horoscopes {
+	border-top:2px solid #ffa500;
+	background-color:#FFFFFF;
+	margin:0 5px;
+	overflow:hidden;
+}
+.horoscopes > .image {
+	float:left;
+}
+
