@@ -3,16 +3,22 @@ body {
 	font-size:11px;
 	
 }
+.title {
+	font-weight:bolder;
+	font-size:12px;
+}
 .title > p {
 	font-weight:bolder;
 	font-size:12px;
 	-webkit-margin-after: 0;
 	margin-left:5px;
 }
+
 .container {
 	background-color:#e6f3fb;
-	width:400px;
-	height:800px;
+	width:330px;
+	padding-bottom:5px;
+	//height:900px;
 }
 .blogroll {
 	font-size:12px;
@@ -52,7 +58,56 @@ body {
 	margin:0 5px;
 	overflow:hidden;
 }
-.horoscopes > .image {
+.horoscopes  .image {
 	float:left;
+}
+.info-horocopes-top{
+	overflow:hidden;
+}
+.info-horocopes-bottom {
+	overflow:hidden;
+	background:url(../images/bg_horocopes-bottom.jpg)
+}
+
+.info-horocopes-bottom .content {
+	float:left;
+}
+.info-horocopes-bottom img {
+	float:right;
+}
+
+.get-news {
+	border-top:2px solid #ffa500;
+	background-color:#FFFFFF;
+	margin:0 5px;
+	overflow:hidden;
+}
+.get-news .content {
+	padding:1em;
+	width:40%;
+	float:left;
+}
+
+.get-news >div:last-child {
+	widht:180px;
+	margin:5px;
+	float:right;
+}
+.competitions {
+	background-color:white;
+	margin:5px;
+}
+.competitions  ul{
+	list-style-type:none;
+	padding-left:0px;
+	
+}
+.competitions  ul li {
+	margin:2px;
+	padding: 2px 5px;
+}
+.competitions  a {
+	color:#0a6395;
+	text-decoration:none;
 }
 
