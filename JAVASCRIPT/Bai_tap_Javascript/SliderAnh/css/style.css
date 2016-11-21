@@ -1,0 +1,25 @@
+#content {
+	width:410px;
+}
+#image {
+	width:400px;
+	height:400px;
+	border:1px solid red;
+	margin:10px;
+}
+#feature {
+	padding:auto;
+	width:400px;
+	margin:10px;
+	height:40px;
+}
+#preview {
+	float:left;
+}
+#index {
+	margin:0 5px;
+	float:left;
+}
+#next {
+	float:right;
+}
