@@ -186,7 +186,7 @@ function  checkGameOver () {
 }
 function savehightScore () {
 	
-	if(!sessionStorage.hightScore || Number(sessionStorage.hightScore) <= point)
+	if(!sessionStorage.hightScore || Number(sessionStorage.hightScore) <= point || sessionStorage.hightScore == undefined)
 		sessionStorage.hightScore = point;
 }
 function clickStopGame () {
