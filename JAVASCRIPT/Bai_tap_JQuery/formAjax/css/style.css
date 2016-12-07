@@ -1,0 +1,116 @@
+body {
+	margin: 10px;
+}
+.calendar {
+	width: 445px;
+	height: auto;
+	display: inline-block;
+	box-sizing: border-box;
+}
+.calendar .result {
+	width: 200px;
+	height: 30px;
+	margin: 3px;
+	background-color: white;
+	border: 1px solid black;
+	background: white url(../images/icon_calendar.jpg) no-repeat center right;
+	display: block !important;
+}
+.calendar .item {
+	width: 60px;
+	height: 30px;
+	float:left;
+	padding: auto;
+	margin: 1px;
+}
+.calendar .btn_next_month{
+	float: left;
+	margin: 1px;
+}
+.calendar .next-year {
+	background-image: url(../images/top.png);
+}
+.calendar .pre-month {
+	background-image: url(../images/preview.png);
+	margin: 1px 3px;
+}
+.calendar .pre-year {
+	background-image: url(../images/bottom.png);
+	clear: both;
+}
+
+.calendar .day {
+	text-align: center;
+	background-color: gray;
+	padding: auto;
+}
+.calendar p {
+	-webkit-margin-before: 0.3em;
+    -webkit-margin-after: 0;
+    display: block;
+}
+.date {
+	background-color: green;
+	text-align: center;
+}
+.curent {
+	background-color: blue;
+}
+.date-on-month {
+	display: inline-block;
+}
+.calendar * {
+	display: none;
+	
+}
+
+/*style form ajax*/
+div {
+	
+}
+div > * {
+	
+	display: block;
+	float:left;
+	margin: auto;
+}
+.box_username {
+	width: 500px;
+	height: 50px;
+}
+.box_password {
+	width: 500px;
+	height: 50px;
+}
+.box_email {
+	width: 500px;
+	height: 50px;
+}
+.box_calendar {
+	width: auto;
+	display: inline-block;
+}
+.box_calendar  {
+	width: 550px;
+	display: flex;
+	clear: left;
+}
+.box_feature {
+	width: 300px;
+	height: 50px;
+	padding: auto;
+	display: flex;
+}
+.box_feature * {
+	flex =1;
+}
+label {
+	width: 100px;
+	margin: auto;
+}
+.birthday {
+	flex =1;
+}
+.error {
+	color: red;
+}

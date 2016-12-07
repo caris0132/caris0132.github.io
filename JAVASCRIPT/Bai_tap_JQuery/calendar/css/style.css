@@ -1,0 +1,61 @@
+.calendar {
+	width: 437px;
+	height: auto;
+	background-color: red;
+	display: inline-block;
+	box-sizing: border-box;
+}
+.calendar .result {
+	width: 200px;
+	height: 30px;
+	margin: 3px;
+	background-color: white;
+	background: white url(../images/icon_calendar.jpg) no-repeat center right;
+	display: block !important;
+}
+.calendar .item {
+	width: 60px;
+	height: 30px;
+	float:left;
+	padding: auto;
+	margin: 1px;
+}
+.calendar .btn_next_month{
+	float: left;
+	margin: 1px;
+}
+.calendar .next-year {
+	background-image: url(../images/top.png);
+}
+.calendar .pre-month {
+	background-image: url(../images/preview.png);
+	margin: 1px 3px;
+}
+.calendar .pre-year {
+	background-image: url(../images/bottom.png);
+	clear: both;
+}
+
+.calendar .day {
+	text-align: center;
+	background-color: gray;
+	padding: auto;
+}
+.calendar p {
+	-webkit-margin-before: 0.3em;
+    -webkit-margin-after: 0;
+    display: block;
+}
+.date {
+	background-color: green;
+	text-align: center;
+}
+.curent {
+	background-color: blue;
+}
+.date-on-month {
+	display: inline-block;
+}
+.calendar * {
+	display: none;
+}

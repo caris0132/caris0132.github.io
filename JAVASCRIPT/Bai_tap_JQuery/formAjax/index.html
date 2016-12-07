@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>form Ajax</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<form action="login.php" method="get" accept-charset="utf-8">
+	
+		<div class="box_username">
+			<label>username:</label>
+			<input type="text" name="username" value="" placeholder="enter username" id="username">
+			<p class="error" id="err_username"></p>
+		</div>
+		<div class="box_password">
+			<label>password:</label>
+			<input type="text" name="username" value="" placeholder="enter username" id="password">
+			<p class="error" id="err_password"></p>
+		</div>
+		<div class="box_email">
+			<label>email:</label>
+			<input type="text" name="username" value="" placeholder="enter username" id="email">
+			<p class="error" id="err_email"></p>
+		</div>
+		<div class="box_calendar">
+			<label class="birthday">date:</label>
+			<div class="calendar">
+			
+			</div>
+		</div>
+		<div class="box_feature">
+			<input type="submit" name="submit" value="submit" id="btn-submit">
+			<input type="button" name="submit" value="refresh"id="btn-refresh">
+		</div>
+
+	</form>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/checkvalidate.js"></script>
+</body>
+</html>
