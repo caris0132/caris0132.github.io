@@ -64,6 +64,12 @@ body {
 	overflow:hidden;
 	
 }
+.jquery {
+	background: url("../images/bg_jquery.jpg") no-repeat center;
+	height:300px;
+	width: 300px;
+	overflow:hidden;
+}
 ul {
 	list-style-type: none;
 	text-align: center;
