@@ -1,0 +1,18 @@
+.item {
+	width: 60px;
+	height: 30px;
+	background-color: green;
+	margin: 1px;
+}
+.item-image {
+	width: 100%;
+	height: 80%;
+}
+.next {
+	background: url(../images/next.jpg)no-repeat center center;
+	float: right;
+}
+.preview {
+	background: url(../images/pre.jpg)no-repeat center center;
+	float: left;
+}

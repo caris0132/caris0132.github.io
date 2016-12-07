@@ -1,0 +1,160 @@
+@media  screen and (max-width: 644px) {
+.float_left {
+	float: none;
+}
+.float_right {
+	float: none;
+}
+.clear_fix {
+	clear: both;
+}
+.header {
+	float: none;
+	margin: auto;
+	text-align: center;
+}
+.header_logo {
+	width: 100%;
+}
+.inner {
+	min-width: 50%;
+	max-width: 100%;
+	height: auto;
+	margin: auto;
+	float: none;
+	text-align: center;
+}
+.header_info {
+	text-align: center;
+}
+.header_info span {
+	color :#f0831e;
+	float: none;
+}
+.txt_left_p {
+	text-align: center;
+}
+.phone_pc {
+	display: none;
+}
+.phone_sp {
+	margin: auto;
+	display: block;
+}
+.title_1 {
+	padding: 0;
+	text-align: left;
+}
+.title_images {
+	display: inline-block;
+}
+ul.subNav li {
+	padding: auto;
+}
+ul.subNav li a{
+	height: auto !important;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+}
+
+.slide {
+	width: 100%;
+}
+
+/*article*/
+.inner_content {
+	width: 100%;
+}
+
+.title_images {
+	margin-bottom: 10px;
+}
+
+.box {
+	display: block;
+	margin: auto;
+	text-align: center;
+	width: 100%;
+}
+.box_content {
+	display: block;
+	margin: auto;
+	width: 100%;
+}
+.box_content_1 {
+	display: block;
+	margin: auto;
+}
+.box_content_2 {
+	display: block;
+	margin: auto;
+}
+
+/* end article*/
+/*aside*/
+.aside {
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/*end aside*/
+/* footer */
+.footer {
+	width: 100%;
+	text-align: center;
+	background:  url(../images/footer_bg.jpg);
+}
+.img_footer_logo {
+	display: block;
+	margin: auto;
+}
+.footer_box_1 {
+	width: 100%;
+	display: block;
+	padding: auto;
+}
+.footer_box_2 {
+	display: inline-block;
+	width: 80%;
+	padding: 5%;
+	margin: 20px auto;
+
+}
+.footer_box_2 ul {
+	display: block;
+	width: 45%;
+	margin-left:10px;
+	list-style: url(../images/footer_bullet.png);
+}
+.footer_box_2 ul li {
+	margin-bottom: 10px;
+}
+.footer_box_2 ul li a {
+	background: none;
+
+	text-decoration: none;
+
+}
+.footer_box_3 {
+	margin: auto;
+	background: white;
+	max-width: 300px;
+	min-width:300px;
+}
+
+.img_footer_logo {
+	display: block;
+}
+.txt_left_footer {
+	display: inline-block;
+	background: none;
+	margin: 10px 5px;
+}
+
+.footer .inner {
+}
+/* end footer*/
+
+
+}
