@@ -14,7 +14,7 @@ body {
 .title {
 	width:500px;
 	height:20px;
-	background:url("../images/title_bg.gif");
+	background:url("../images/title_bg.GIF");
 	font-weight:bold;
 }
 .title p {
@@ -23,7 +23,7 @@ body {
 	line-height:1.3em;
 }
 .player-profile-avatar {
-	background:url("../images/Avatar.gif");
+	background:url("../images/Avatar.GIF");
 	width:120px;
 	height:120px;
 	float:left;
