@@ -75,8 +75,8 @@ function addMonsterByLever () {
 		if (x>canvas.width-50) {
 			x = canvas.width-55;
 		}
-		if (x>canvas.height-50) {
-			x = canvas.height-55;
+		if (y>canvas.height-50) {
+			y = canvas.height-55;
 		}
 		var monster = new Monster(img_src,x,y,50,50);
 		monster.speedX *= lever;
