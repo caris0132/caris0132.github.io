@@ -78,23 +78,32 @@ $(document).ready(function() {
 	$("input[type='button']").click(function(event) {
 		var check = parseInt(select_month.val()) > 0;
 		var check2 = $(this).attr('class') == 'pre-month item';
+		debugger
 		if($(this).attr('class') == 'btn_next_month' && parseInt(select_month.val()) <11) {
 			select_month.val(parseInt(select_month.val()) + 1) ;
+			date_on_month.remove();
+			calendar.append(loadDateOnMonth());
 		}
 		if($(this).attr('class') == 'pre-month item' && parseInt(select_month.val()) > 0) {
 			select_month.val(parseInt(select_month.val()) - 1) ;
+			date_on_month.remove();
+			calendar.append(loadDateOnMonth());
 		}
 		if($(this).attr('class') == 'next-year item' && parseInt(select_year.val()) < (new Date().getFullYear())) {
 			select_year.val(parseInt(select_year.val()) + 1) ;
+			date_on_month.remove();
+			calendar.append(loadDateOnMonth());
 		}
 		if($(this).attr('class') == 'pre-year item' && parseInt(select_year.val()) > 1990) {
 			select_year.val(parseInt(select_year.val()) - 1) ;
+			date_on_month.remove();
+			calendar.append(loadDateOnMonth());
 		}
-		date_on_month.remove();
-		calendar.append(loadDateOnMonth());
+		
 		$('.calendar *').css('display', 'inline-block');
 	});
 	$('.date').click(function  () {
+		debugger
 		var date = parseInt($(this).text());
 		var result_date = date + '/' + (parseInt(select_month.val())+1) +'/' + select_year.val();
 		result.text(result_date);
@@ -137,7 +146,8 @@ function createDayOnWeek () {
 function loadDateOnMonth () {
 	date_on_month = $('<div></div>');
 	date_on_month.addClass('date-on-month');
-	var first_date_on_week = new Date(1,select_month.val(),select_year.val()).getDay();
+	var first_date_on_week = new Date(1,select_month.val()-1,select_year.val()).getDay();
+	console.log(select_year.val());
 	var total_date_on_month;
 	var month = select_month.val();
 	if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
