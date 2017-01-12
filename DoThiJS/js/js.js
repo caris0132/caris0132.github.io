@@ -14,8 +14,10 @@ var Graph = function() {
     var rowSize;
     var margin;
     var header;
+    var x;
+    var y;
     var init = function() {
-        name = ["USA", "China", "India", "Japan", "Germany"];
+        name = ["A", "B", "C", "D", "E"];
         itemValue = [14, 7, 3, 4, 5];
         sections = name.length - 1;
         stepSize = 1;
@@ -29,13 +31,14 @@ var Graph = function() {
         getValueMax();
         canvas = document.getElementById(canvasID);
         context = canvas.getContext("2d");
-        yScale = (canvas.height - columnSize) / (valMax);
+        yScale = (canvas.height - columnSize - margin) / (valMax);
         xScale = (canvas.width - rowSize - 2 * margin) / (sections);
     };
     var drawLine = function() {
+        count = 0;
         context.beginPath();
-        for (scale = sections; scale >= 0; scale = scale - stepSize) {
-            var x = rowSize + (xScale * count * stepSize);
+        for (scale = 0; scale <= sections; scale = scale + stepSize) {
+            x = rowSize + (xScale * count * stepSize);
             context.fillText(name[scale], margin, x + margin);
             context.moveTo(columnSize, x);
             context.lineTo(canvas.height, x);
@@ -44,10 +47,10 @@ var Graph = function() {
         context.stroke();
     };
     var drawColumn = function() {
+        count = 0;
     	context.beginPath();
-        for (scale = valMax; scale >= 0; scale = scale - stepSize) {
+        for (scale = 0; scale <= valMax; scale = scale + stepSize) {
             y = columnSize + (yScale * count * stepSize);
-            console.log(y+"aaa");
             context.fillText(scale,y - margin, margin );
             context.moveTo(y, 2*margin);
             context.lineTo(y,canvas.height);
@@ -62,15 +65,16 @@ var Graph = function() {
         getVender('canvas');
         drawLine();
         drawColumn();
+        drawEachGraph();
     }
     var drawEachGraph = function  () {
     	// translate to bottom of graph  inorder to match the data 
-  		context.translate(0,canvas.height - margin);
+  		context.translate(rowSize, columnSize);
 		context.scale(xScale, yScale);
-  
+        console.log(xScale +"  " +yScale);
 		// draw each graph bars	
 		for (i=0;i<5;i++) {
-			context.fillRect(i+1, 0, 0.3, itemValue[i]);
+			context.fillRect(10, 10, 100,100);
 		}
     }
     var getValueMax = function() {
