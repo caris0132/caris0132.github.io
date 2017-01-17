@@ -130,7 +130,7 @@ var Graph = function() {
     	}
 
     	context.stroke();
-        context.fillStyle = "black";
+        //context.fillStyle = "black";
     }
     
     // print names of each data entry
@@ -141,7 +141,6 @@ var Graph = function() {
             posX = rowSize + i * xScale;
             if (listProject.dataPoints[i].y == 0) {
                 posY = columnSize + yScale* (Val_Max - 0.1);
-                console.log(posY);
                 lstGraph.push({posX:posX, posY:posY, widthGraph:xScale * 0.6, heightGraph:0.1 * yScale,index: i});
             }
             else {
@@ -177,16 +176,26 @@ var Graph = function() {
                 },0);
             }();
             if(isContain ) {
-                    isMouseOverGraph = isContain;
-                    context.fillStyle="black";
-                    context.clearRect(0,0,canvas.width, canvas.height)
-                    drawGraph(listProject,canvas);
-                    context.shadowBlur=3;
-                    context.shadowColor="black";
-                    context.clearRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
-                    context.fillRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
-                    context.shadowBlur = 0;
-                    context.setTransform(1, 0, 0, 1, 0, 0);
+                isMouseOverGraph = isContain;
+                context.fillStyle="black";
+                context.clearRect(0,0,canvas.width, canvas.height)
+                drawGraph(listProject,canvas);
+                context.shadowBlur=3;
+                context.shadowColor="black";
+                context.clearRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
+                context.fillRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
+                context.shadowBlur = 0;
+                context.setTransform(1, 0, 0, 1, 0, 0);
+                context.strokeStyle="black";
+                context.fillStyle="#EDE9EE";
+                var detailGrap = listProject.titleRight + " : " + listProject.dataPoints[isContain.index].y;
+                var widthDetailBox = context.measureText(detailGrap).width + 20;
+                context.fillRect(isContain.posX ,isContain.posY - 10,widthDetailBox, -40);
+                context.fillStyle="black";
+                context.textAlign = "left"
+                context.fillText (listProject.dataPoints[isContain.index].x,isContain.posX + 10 ,isContain.posY - 40);
+                
+                context.fillText (detailGrap,isContain.posX + 10 ,isContain.posY - 20);
             }
             
 
@@ -216,16 +225,7 @@ var Graph = function() {
                 
                 context.lineWidth = 1;
                 context.strokeRect(isContain.posX + 1, isContain.posY + 1, isContain.widthGraph - 3, isContain.heightGraph - 3);
-                context.strokeStyle="black";
-                context.fillStyle="#EDE9EE";
-                var detailGrap = listProject.titleRight + " : " + listProject.dataPoints[isContain.index].y;
-                var widthDetailBox = context.measureText(detailGrap).width + 20;
-                context.fillRect(isContain.posX ,isContain.posY - 10,widthDetailBox, -40);
-                context.fillStyle="black";
-                context.textAlign = "left"
-                context.fillText (listProject.dataPoints[isContain.index].x,isContain.posX + 10 ,isContain.posY - 40);
                 
-                context.fillText (detailGrap,isContain.posX + 10 ,isContain.posY - 20);
             }
             else {
                 context.fillStyle="black";
