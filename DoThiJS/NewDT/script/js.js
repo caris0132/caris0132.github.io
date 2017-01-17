@@ -68,13 +68,17 @@ var Graph = function() {
         var count = 0;
         for (scale = Val_Max; scale >= 0; scale = scale - stepSize) {
             y = columnSize + (yScale * count * stepSize);
-
+            context.beginPath();
             context.fillText(scale, rowSize - 2* margin, y + margin / 2);
-            
-            context.lineWidth=0.1;
+            if( scale == 0)
+                context.lineWidth = 0.2;
+            else
+                context.lineWidth=0.1;
             context.moveTo(rowSize, y);
             context.lineTo(canvas.width - rowSize, y);
             count++;
+            context.closePath();
+            context.stroke();
         }
         context.stroke();
     };
@@ -121,6 +125,9 @@ var Graph = function() {
     		var widthText = context.measureText(text).width;
 			if(widthText > rowSize/2) {
 				var arrText = text.split(' ').forEach(function(item, index) {
+                    var widthItem = context.measureText(item).width;
+                    if(widthItem > rowSize/2)
+                        item = item.substr(0, 4) + ' ...';
 					context.fillText(item, canvas.width -  rowSize/2 , columnSize + index * 20);
 				});
 			}
@@ -194,7 +201,6 @@ var Graph = function() {
                 context.fillStyle="black";
                 context.textAlign = "left"
                 context.fillText (listProject.dataPoints[isContain.index].x,isContain.posX + 10 ,isContain.posY - 40);
-                
                 context.fillText (detailGrap,isContain.posX + 10 ,isContain.posY - 20);
             }
             

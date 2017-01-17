@@ -16,7 +16,7 @@ var data = {
     titleFont: '20pt Myriad Pro',
     titleStyle: 'red',
     titleRight: 'LEVEL OF POSITION',
-    titleRightFont: '12pt Myriad Pro',
+    titleRightFont: '10pt Myriad Pro',
     titleRightStyle : 'black',
     fontValueStyle : 'blue',
     fontNameStyle :'black',
