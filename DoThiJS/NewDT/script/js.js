@@ -32,18 +32,6 @@ var Graph = function() {
         drawGraph(data,canvasID);
         createEventGraph();
     }
-    // var init = function(lstProject) {
-    //     listProject = lstProject;
-    //     sections = lstProject.length;
-    //     Val_Max = lstProject.reduce(function(a, b) {
-    //         return (a > b.levelOfPosition) ? a : b.levelOfPosition;
-    //     });
-
-    //     stepSize = 1;
-    //     columnSize = 50;
-    //     rowSize = 120;
-    //     margin = 10;
-    // };
     var init1 = function  (data) {
         listProject = data;
         sections = listProject.dataPoints.length;
@@ -68,21 +56,23 @@ var Graph = function() {
         var count = 0;
         for (scale = Val_Max; scale >= 0; scale = scale - stepSize) {
             y = columnSize + (yScale * count * stepSize);
-            y = Math.round(y);
-
+            
             //change color and fill value text.
             context.fillStyle = listProject.fontValueStyle;
             context.strokeStyle = listProject.fontValueStyle;
             context.fillText(scale, rowSize - 2* margin, y + margin / 2);
-            if( scale == 0)
-                context.lineWidth = 1;
-            else
-                context.lineWidth=0.1;
-            //change color line
-            
             context.fillStyle = listProject.colorLine;
             context.strokeStyle = listProject.colorLine;
+            if( scale == 0) {
+                context.lineWidth = 1;
+                context.strokeStyle = 'black';
+            }
+            else
+                context.lineWidth=0.2;
+            //change color line
             
+
+            y = (y % 1)? y : y + 0.5;
             context.beginPath();
             context.moveTo(rowSize, y);
             context.lineTo(canvas.width - rowSize, y);
@@ -151,7 +141,6 @@ var Graph = function() {
     	}
 
     	context.stroke();
-        //context.fillStyle = "black";
     }
     
     // print names of each data entry
