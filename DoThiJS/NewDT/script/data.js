@@ -19,7 +19,7 @@ var data = {
     titleRight: 'LEVEL OF POSITION',
     titleRightFont: '10pt Myriad Pro',
     titleRightStyle : 'black',
-    fontValueStyle : 'blue',
+    fontValueStyle : 'black',
     fontNameStyle :'black',
     xLabel: 'Tên dự án',
     xlabelFont : 'italic 16pt Myriad Pro',

@@ -77,7 +77,7 @@ var Graph = function() {
             if( scale == 0)
                 context.lineWidth = 1;
             else
-                context.lineWidth=0.5;
+                context.lineWidth=0.1;
             //change color line
             
             context.fillStyle = listProject.colorLine;
