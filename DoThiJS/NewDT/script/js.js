@@ -50,8 +50,9 @@ var Graph = function() {
         Val_Max = listProject.dataPoints.reduce(function(a, b) {
             return (a > b.y) ? a : b.y;
         });
-        stepSize = 1;
+        stepSize = listProject.stepSize;
         columnSize = listProject.columnSize;
+        var widthTitleLeft = listProject.titleRight;
         rowSize = listProject.rowSize;
         margin = listProject.margin;
     }
@@ -63,22 +64,36 @@ var Graph = function() {
     };
     var drawLineForProject = function() {
         context.beginPath();
-        context.fillStyle = listProject.fontValueStyle;
-            context.strokeStyle = listProject.fontValueStyle;
+        
         var count = 0;
         for (scale = Val_Max; scale >= 0; scale = scale - stepSize) {
             y = columnSize + (yScale * count * stepSize);
-            context.beginPath();
+            y = Math.round(y);
+
+            //change color and fill value text.
+            context.fillStyle = listProject.fontValueStyle;
+            context.strokeStyle = listProject.fontValueStyle;
             context.fillText(scale, rowSize - 2* margin, y + margin / 2);
             if( scale == 0)
-                context.lineWidth = 0.2;
+                context.lineWidth = 1;
             else
-                context.lineWidth=0.1;
+                context.lineWidth=0.5;
+            //change color line
+            
+            context.fillStyle = listProject.colorLine;
+            context.strokeStyle = listProject.colorLine;
+            
+            context.beginPath();
             context.moveTo(rowSize, y);
             context.lineTo(canvas.width - rowSize, y);
+            console.log(context.lineWidth == 0.1);
             count++;
-            context.closePath();
-            context.stroke();
+            context.beginPath(); 
+
+            context.moveTo(rowSize, y);
+            context.lineTo(canvas.width - rowSize, y);
+            context.stroke();  // Draw it
+
         }
         context.stroke();
     };
@@ -193,13 +208,13 @@ var Graph = function() {
                 context.fillRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
                 context.shadowBlur = 0;
                 context.setTransform(1, 0, 0, 1, 0, 0);
-                context.strokeStyle="black";
-                context.fillStyle="#EDE9EE";
+                context.fillStyle=listProject.backgroundDetailBox;
                 var detailGrap = listProject.titleRight + " : " + listProject.dataPoints[isContain.index].y;
                 var widthDetailBox = context.measureText(detailGrap).width + 20;
                 context.fillRect(isContain.posX ,isContain.posY - 10,widthDetailBox, -40);
-                context.fillStyle="black";
-                context.textAlign = "left"
+                context.fillStyle = listProject.colorDetailBox;
+                context.font = listProject.styleDetailBox;
+                context.textAlign = "left";
                 context.fillText (listProject.dataPoints[isContain.index].x,isContain.posX + 10 ,isContain.posY - 40);
                 context.fillText (detailGrap,isContain.posX + 10 ,isContain.posY - 20);
             }
