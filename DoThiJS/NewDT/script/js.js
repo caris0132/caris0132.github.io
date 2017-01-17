@@ -14,18 +14,36 @@ var Graph = function() {
     var graphColor;
     var lstGraph = [];
     var y;
-    var init = function(lstProject) {
-        listProject = lstProject;
-        sections = lstProject.length;
-        Val_Max = lstProject.reduce(function(a, b) {
-            return (a > b.levelOfPosition) ? a : b.levelOfPosition;
-        });
 
-        stepSize = 1;
-        columnSize = 50;
-        rowSize = 120;
-        margin = 10;
+    //draw graph
+    var drawGraph = function(data, canvasID) {
+        init1(data);
+        getVender(canvasID);
+        drawLineForProject();
+        fillTitleContent(listProject.title,'header');
+        fillTitleContent(listProject.xLabel,'footer');
+        fillTitleContent(listProject.yLabel,'left');
+        fillTitleContent(listProject.titleRight,'right');
+        drawNameProject();
+        drawEachGraph();
+        
     };
+    var runGraph = function  (data, canvasID) {
+        drawGraph(data,canvasID);
+        createEventGraph();
+    }
+    // var init = function(lstProject) {
+    //     listProject = lstProject;
+    //     sections = lstProject.length;
+    //     Val_Max = lstProject.reduce(function(a, b) {
+    //         return (a > b.levelOfPosition) ? a : b.levelOfPosition;
+    //     });
+
+    //     stepSize = 1;
+    //     columnSize = 50;
+    //     rowSize = 120;
+    //     margin = 10;
+    // };
     var init1 = function  (data) {
         listProject = data;
         sections = listProject.dataPoints.length;
@@ -45,10 +63,15 @@ var Graph = function() {
     };
     var drawLineForProject = function() {
         context.beginPath();
+        context.fillStyle = listProject.fontValueStyle;
+            context.strokeStyle = listProject.fontValueStyle;
         var count = 0;
         for (scale = Val_Max; scale >= 0; scale = scale - stepSize) {
             y = columnSize + (yScale * count * stepSize);
-            context.fillText(scale, rowSize - margin, y + margin / 2);
+
+            context.fillText(scale, rowSize - 2* margin, y + margin / 2);
+            
+            context.lineWidth=0.1;
             context.moveTo(rowSize, y);
             context.lineTo(canvas.width - rowSize, y);
             count++;
@@ -69,46 +92,31 @@ var Graph = function() {
     var computeHeight = function(value) {
         y = canvas.height - value * yScale;
     }
-    //draw graph
-    var drawGraph = function(data, canvasID) {
-        init1(data);
-        getVender(canvasID);
-        drawLineForProject();
-        fillTitleContent(listProject.title,'header');
-        fillTitleContent(listProject.xLabel,'footer');
-        fillTitleContent(listProject.yLabel,'left');
-        fillTitleContent(listProject.titleLeft,'right');
-        drawNameProject();
-        drawEachGraph();
-        
-    };
-    var runGraph = function  (data, canvasID) {
-        drawGraph(data,canvasID);
-        createEventGraph();
-    }
     //fill text about tilte , project name ...
     var fillTitleContent = function  (text,positionText) {
     	context.beginPath();
     	context.textAlign = "center";	
     	if (positionText == "header") {
-    		context.font = "18px Verdana";
+    		context.font = listProject.titleFont;
             context.fillStyle = listProject.titleStyle;
     		context.fillText(text, (canvas.width )/2, columnSize/2);
     	}
     	if (positionText == "footer") {
-    		context.font = "16px Arial";
+    		context.font = listProject.xlabelFont;
+            context.fillStyle = listProject.xlabelStyle;
     		context.fillText(text, (canvas.width)/2, canvas.height - columnSize/2);
     	}
     	if (positionText == "left") {
-    		context.font = "italic 16px Arial";
-    		//context.save();
+    		context.font = listProject.yLabelFont;
+            context.fillStyle = listProject.ylabelStyle;
 			context.translate(0, canvas.height);
 			context.rotate( - Math.PI/2);
-			context.fillText(text, canvas.height/2, columnSize);
+			context.fillText(text, canvas.height/2, columnSize/2);
 			context.setTransform(1, 0, 0, 1, 0, 0);
     	}
     	if (positionText == "right") {
-    		context.font = "10px Arial";
+    		context.font = listProject.titleRightFont;
+            context.fillStyle = listProject.titleRightStyle;
     		context.textAlign ="left";
     		var widthText = context.measureText(text).width;
 			if(widthText > rowSize/2) {
@@ -121,7 +129,7 @@ var Graph = function() {
 			context.restore();
     	}
 
-    	//context.stroke();
+    	context.stroke();
         context.fillStyle = "black";
     }
     
@@ -130,14 +138,16 @@ var Graph = function() {
     	var posX = rowSize;
     	var posY = columnSize + margin;
     	for (i = 0; i < sections; i++) {
-
-            if (listProject.dataPoints[i].y == 0) {
-                listProject.dataPoints[i].y = 0.1;
-            }
             posX = rowSize + i * xScale;
-            posY = columnSize + yScale* (Val_Max - listProject.dataPoints[i].y);
-            lstGraph.push({posX:posX, posY:posY, widthGraph:xScale * 0.6, heightGraph:listProject.dataPoints[i].y * yScale,index: i});
-            
+            if (listProject.dataPoints[i].y == 0) {
+                posY = columnSize + yScale* (Val_Max - 0.1);
+                console.log(posY);
+                lstGraph.push({posX:posX, posY:posY, widthGraph:xScale * 0.6, heightGraph:0.1 * yScale,index: i});
+            }
+            else {
+                posY = columnSize + yScale* (Val_Max - listProject.dataPoints[i].y);
+                lstGraph.push({posX:posX, posY:posY, widthGraph:xScale * 0.6, heightGraph:listProject.dataPoints[i].y * yScale,index: i});
+            }
         }
         context.fillStyle = listProject.graphColor;
 
@@ -154,7 +164,7 @@ var Graph = function() {
         var isMouseOverGraph = null ;
         var isClicked = null;
     	//event mouse hover
-    	canvas.addEventListener('mousemove',function  () {
+    	canvas.addEventListener('mousemove',function  (event) {
     		var x = event.pageX - canvas.offsetLeft;
             var y = event.pageY - canvas.offsetTop;
             if (isClicked) {
@@ -167,12 +177,11 @@ var Graph = function() {
                 },0);
             }();
             if(isContain ) {
-                    console.log("â");
                     isMouseOverGraph = isContain;
                     context.fillStyle="black";
                     context.clearRect(0,0,canvas.width, canvas.height)
                     drawGraph(listProject,canvas);
-                    context.shadowBlur=20;
+                    context.shadowBlur=3;
                     context.shadowColor="black";
                     context.clearRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
                     context.fillRect(isContain.posX, isContain.posY, isContain.widthGraph, isContain.heightGraph);
@@ -183,7 +192,7 @@ var Graph = function() {
 
     	});
         //event click graph
-        canvas.addEventListener('click',function  () {
+        canvas.addEventListener('click',function  (event) {
             var x = event.pageX - canvas.offsetLeft;
             var y = event.pageY - canvas.offsetTop;
             //check graph contain position mouse
@@ -204,10 +213,12 @@ var Graph = function() {
                     
                 }
                 context.strokeStyle="white";
+                
+                context.lineWidth = 1;
                 context.strokeRect(isContain.posX + 1, isContain.posY + 1, isContain.widthGraph - 3, isContain.heightGraph - 3);
                 context.strokeStyle="black";
                 context.fillStyle="#EDE9EE";
-                var detailGrap = listProject.titleLeft + " : " + listProject.dataPoints[isContain.index].y;
+                var detailGrap = listProject.titleRight + " : " + listProject.dataPoints[isContain.index].y;
                 var widthDetailBox = context.measureText(detailGrap).width + 20;
                 context.fillRect(isContain.posX ,isContain.posY - 10,widthDetailBox, -40);
                 context.fillStyle="black";
