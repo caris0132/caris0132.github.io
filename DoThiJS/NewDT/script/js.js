@@ -86,7 +86,6 @@ var Graph = function() {
             context.beginPath();
             context.moveTo(rowSize, y);
             context.lineTo(canvas.width - rowSize, y);
-            console.log(context.lineWidth == 0.1);
             count++;
             context.beginPath(); 
 
