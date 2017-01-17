@@ -126,9 +126,9 @@ var Graph = function() {
 			if(widthText > rowSize/2) {
 				var arrText = text.split(' ').forEach(function(item, index) {
                     var widthItem = context.measureText(item).width;
-                    if(widthItem > rowSize/2)
+                    if(widthItem > rowSize)
                         item = item.substr(0, 4) + ' ...';
-					context.fillText(item, canvas.width -  rowSize/2 , columnSize + index * 20);
+					context.fillText(item, canvas.width -  rowSize + margin , columnSize +  yScale + index * 20);
 				});
 			}
 			else
