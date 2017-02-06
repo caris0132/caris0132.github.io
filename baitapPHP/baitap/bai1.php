@@ -19,14 +19,22 @@ function funExercise($arr1, $arr2, $arr3)
         $result = array_unique(array_merge($arr2, $arr3));
         echo '<br>' . implode(', ', $result);
         echo '<br>';
-        array_filter($result, function ($value) {
-            if (count($value) % 2 == 0) {
+        array_walk($result, function ($value) {
+            if (strlen($value) % 2 == 0) {
                 echo "$value, ";
             }
 
         });
+
+        echo '</br>';
         sort($arr1);
-        echo implode(', ', array_intersect($arr1, $result));
+        var_dump($result);
+        var_dump(array_intersect_key($arr1, $result));
+        echo implode(', ', array_intersect_key($arr1, $result));
+        echo '</br>'.'///';
+
+        rsort($arr1);
+        echo implode(', ', array_diff_key($arr1, $result));
     } catch (logicException $e) {
         error_log('message');
     }
