@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<p id='result'></p>
+	<script type="text/javascript">
+		function setCookie (cName, cValue, exDay) {
+			var day = new Date();
+			day.setTime(day.getTime() + exDay * 24 * 60 * 60 * 1000);
+			var expires = 'expires=' + day.toUTCString();
+			document.cookie = cName + '=' + cValue + '=' + expires;
+		}
+		function getCookie (cName) {
+			var arrCookie = document.cookie.split(';');
+			for (var i = 0; i < arrCookie.length; i++) {
+				var item =  arrCookie[i];
+				while (item.charAt(0)== ' ') {
+					item = item.substring(1);
+				}
+				if (item.indexOf(cName) == 0) 
+					return item.substring(cName.length, item.length);
+				
+			};
+			return ;
+		}
+		setCookie('cookieJavascipt', 'create cookie by javascript', 3);
+		document.getElementById('result').innerHTML = 'Cookie:' + 'cookieJavascipt' + getCookie('cookieJavascipt');
+	</script>
+</body>
+</html>

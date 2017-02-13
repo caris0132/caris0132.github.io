@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function loadAjax () {
+			$.ajax({
+				url : 'result.php',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					a : 1,
+					b : 2,
+					c : 3,
+					d : 4
+				},
+				success : function  (result) {
+					console.log(result);
+					alert('total: ' + result.total + ' - ' + 'multi: ' + result.multi);
+				},
+				error : function  () {
+					alert('that bai');
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<input type="button" name="" value="loadAjax" onclick="loadAjax()">
+</body>
+</html>

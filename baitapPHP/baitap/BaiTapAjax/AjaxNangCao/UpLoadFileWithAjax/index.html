@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<form action="upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data" name="uploadform">
+		<input type="file" name="avartar" value="" placeholder="">
+		<input type="submit" name="submit" value="upload">
+		<div id="info-file-upload">
+			
+		</div>
+		<p id='process'></p>
+		<div id="content-file">
+			<img src="" alt="">
+		</div>
+	</form>
+	<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
+		$('form')[0].addEventListener('submit', function  (evt) {
+			$('#info-file-upload').html('');
+			evt.preventDefault();
+			var file = $(':file')[0];
+			var formData = new FormData();
+			formData.append('file',file.files[0]);
+			$.ajax({
+				url : 'upload.php',
+				type : 'POST',
+				data: formData,
+  				processData: false,  // tell jQuery not to process the data
+  				contentType: false,   // tell jQuery not to set contentType
+       			xhr: function(){
+        			//upload Progress
+        			var xhr = $.ajaxSettings.xhr();
+        			if (xhr.upload) {
+            			xhr.upload.addEventListener('progress', function(event) {
+                			var percent = 0;
+                			var position = event.loaded || event.position;
+                			var total = event.total;
+                			if (event.lengthComputable) {
+                    		percent = Math.ceil(position / total * 100);
+                			}
+                		//update progress label
+                		$('#process').text('process : ' + percent + '%');
+                		if (percent == 100)
+                			$('#process').text('sucess');
+            			}, true);
+        			};
+        			return xhr;
+    			},
+
+			}).done(function  (data) {
+				$('#info-file-upload').html(data);
+				$('#content-file').html('')
+			})
+		})
+	</script>
+</body>
+</html>

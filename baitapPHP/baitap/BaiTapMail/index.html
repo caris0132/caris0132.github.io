@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<form action="sendmail.php" method="post" accept-charset="utf-8">
+		<div>
+			To:
+			<input type="email" name="to" value="" placeholder="enter Email">
+		</div>
+		<div>
+			Object:
+			<input type="text" name="object" value="" placeholder="enter title of email">
+		</div>
+		<div>
+			Message:
+			<textarea name="message"></textarea>
+		</div>
+		<input type="submit" name="send" value="Send Mail">
+	</form>
+</body>
+</html>

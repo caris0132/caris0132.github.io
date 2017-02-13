@@ -45,6 +45,10 @@
 	padding: 0;
 	text-align: left;
 }
+div.title_3{
+	margin:40px 0 15px 0;
+	width: 100%;
+}	
 .title_images {
 	display: inline-block;
 }
@@ -80,13 +84,14 @@ ul.subNav li a{
 	display: block;
 	margin: auto;
 	width: 100%;
+
 }
 .box_content_1 {
-	display: block;
+	display: inline-block;
 	margin: auto;
 }
 .box_content_2 {
-	display: block;
+	display: inline-block;
 	margin: auto;
 }
 
