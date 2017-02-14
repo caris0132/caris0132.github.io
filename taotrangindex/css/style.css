@@ -284,13 +284,15 @@ strong {
 }
 .info_older span {
 	margin-right: 10px;
+	padding-left: 20px;
+	background: url(../images/bullet_1.jpg) no-repeat left center;
 }
 .info_older p {
 	margin-bottom: 20px;
 	margin-top: 20px;
 	padding-left: 20px;
 	display: inline-block;
-	background: url(../images/bullet_1.jpg) no-repeat left center;
+	
 
 }
 /* end article*/

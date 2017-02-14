@@ -84,6 +84,7 @@ ul.subNav li a{
 	display: block;
 	margin: auto;
 	width: 100%;
+	text-align: left;
 
 }
 .box_content_1 {
@@ -93,6 +94,11 @@ ul.subNav li a{
 .box_content_2 {
 	display: inline-block;
 	margin: auto;
+}
+.info_older p,span {
+	text-align: left;
+	display: block;
+	margin-top: 10px;
 }
 
 /* end article*/
