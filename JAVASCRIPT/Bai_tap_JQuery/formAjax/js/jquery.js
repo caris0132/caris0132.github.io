@@ -51,7 +51,7 @@ $(document).ready(function() {
 	createSelectYear();
 	select_year.addClass('item');
 
-	result = $('<div></div>');
+	result = $('<input>');
 	result.addClass('result');
 
 	calendar.append(result);
@@ -104,7 +104,7 @@ $(document).ready(function() {
 	$('.date').click(function  () {
 		var date = parseInt($(this).text());
 		var result_date = date + '/' + (parseInt(select_month.val())+1) +'/' + select_year.val();
-		result.text(result_date);
+		result.val(result_date);
 		$('.calendar *').css('display', 'none');
 
 	});

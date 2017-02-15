@@ -8,7 +8,6 @@
 	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-	<form action="login.php" method="get" accept-charset="utf-8">
 	
 		<div class="box_username">
 			<label>username:</label>
@@ -30,13 +29,13 @@
 			<div class="calendar">
 			
 			</div>
+			<p class="error" id="err_date"></p>
 		</div>
 		<div class="box_feature">
-			<input type="submit" name="submit" value="submit" id="btn-submit">
-			<input type="button" name="submit" value="refresh"id="btn-refresh">
+			<input type="submit" name="submit" value="submit" id="btn-submit" disabled="disabled">
+			<input type="button" name="refresh" value="refresh" id="btn-refresh">
 		</div>
 
-	</form>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/checkvalidate.js"></script>
 </body>

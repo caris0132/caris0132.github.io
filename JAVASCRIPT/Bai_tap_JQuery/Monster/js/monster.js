@@ -8,11 +8,13 @@ var mapHeight;
 var time_start = null;
 var start = false;
 var stop = false;
+var pause = false;
 var lever = 1;
 var num_boom = 3;
 var num_stop = 3;
 var point = 0;
 var heart = 5;
+var heart_icon;
 var img_src = 'images/monster.png';
 var listMonster = new Array();
 
@@ -29,6 +31,7 @@ function Monster (ing_src,cx,cy,imgWidth,imgHeight) {
 	this.speedX = 1;
 	this.speedY = 1;
 }
+//add monters into canvas
 Monster.prototype.draw = function() {
 	this.img.src = this.img_src;
 	context.drawImage(this.img,this.cx,this.cy,this.imgWidth,this.imgHeight);
@@ -38,6 +41,7 @@ Monster.prototype.draw = function() {
 	
 	
 };
+//move monters into canvas
 Monster.prototype.move = function(lever) {
 	context.clearRect(this.cx,this.cy,this.imgWidth,this.imgHeight);
 	this.cx += this.speedX*lever;
@@ -48,19 +52,19 @@ Monster.prototype.move = function(lever) {
 		this.speedY = -this.speedY;
 	this.draw(context);
 };
+//check monster is contanin mouse positon 
 Monster.prototype.isContain = function(x,y) {
 	var right = this.cx + this.imgWidth;
 	var bottom = this.cy + this.imgHeight;
-	console.log(right,bottom);
 	return x > this.cx && x < right && y > this.cy && y < bottom;
 };
 Monster.prototype.selectAt = function(x,y) {
 	if (this.isContain(x,y)) {
-		console.log("click trung");
 		this.isSelected = true;
 		return true;
 	}
 };
+//move all monster into canvas
 function moveListMonter () {
 	context.clearRect(0,0 ,canvas.width,canvas.height);
 	for (var i = 0; i < listMonster.length; i++) {
@@ -68,6 +72,7 @@ function moveListMonter () {
 	};
 	//reqAnimation(moveListMonter);
 }
+//increare count monster by lever
 function addMonsterByLever () {
 	for (var i = 0; i <= lever; i++) {
 		var x = Math.random()*canvas.width;
@@ -88,8 +93,9 @@ function addMonsterByLever () {
 function drawListMonter () {
 	for (var i = 0; i < listMonster.length; i++) {
 		listMonster[i].draw();
-	};
+	}
 }
+//get mouse position
 function getMousePoint (canvas, evt) {
 	var rect = canvas.getBoundingClientRect();
         return {
@@ -97,9 +103,10 @@ function getMousePoint (canvas, evt) {
           y: evt.clientY - rect.top
         };
 }
+// handle click monster . add 50 point wich each monster is click
 function monsters_click (x,y) {
 
-	if(start == false || checkGameOver() == true)
+	if(start == false || checkGameOver() == true || pause)
 		return;
 	for (var i = listMonster.length - 1; i >= 0; i--) {
 		if (listMonster[i].selectAt(x,y) == true) {
@@ -124,8 +131,9 @@ function monsters_click (x,y) {
 	
 	
 }
+//check status game  and run game
 function runGame (time) {
-	if(start == false || stop == true)
+	if(start == false || stop == true || pause)
 		return;
 	if (!time_start) {
 		time_start = time;
@@ -149,7 +157,7 @@ function runGame (time) {
 
 	
 }
-
+//create default status game 
 function startGame () {
 	cancelAnimation(myReq);
 	start = true;
@@ -178,17 +186,22 @@ function checkGameWin () {
 }
 function  checkGameOver () {
 	if(heart == 0) {
-		console.log("game over");
+		context.clearRect( 0, 0, canvas.width, canvas.height);
+		context.font="40px Georgia";
+		context.textAlign = 'center';
+		context.fillText("Game Over!",canvas.width/2,canvas.height/2);
 		return true;
 	}
 	return false;
 
 }
+//save hightscore into sessionStorage
 function savehightScore () {
 	
 	if(!sessionStorage.hightScore || Number(sessionStorage.hightScore) <= point || sessionStorage.hightScore == undefined)
 		sessionStorage.hightScore = point;
 }
+//handle when click button stop
 function clickStopGame () {
 
 	if(!stop) {
@@ -203,25 +216,39 @@ function clickStopGame () {
 	}
 	loadInfoGame();
 }
+//handle when click button boom 
 function clickBoom () {
 	if(num_boom>0) {
 		point += listMonster.length *50;
 		listMonster.splice(0,listMonster.length);
+		context.clearRect(0,0,canvas.width,canvas.height);
 		num_boom--;
 	}
 	loadInfoGame();
 }
+//show info game about score , heart , boom , ...
 function loadInfoGame () {
 	$('#num-boom').text(num_boom);
 	$('#num-stop').text(num_stop);
 	$('#now-score').text("Score:" + point);
 	$('#hight-score').text("hight Score:"+sessionStorage.hightScore);
-	$('#status-gamer-heart').text("Heart:" + heart);
+	//$('#status-gamer-heart').text("Heart:" + heart);
 	$('#status-gamer-speed').text("Speed:" + lever);
+	heart_icon =  $('.heart-icon');
+	
+	heart_icon.css('width', 20*heart+"px");
 
 }
+//handle when click button pause
+function clickPause() {
+	if(pause) {
+		myReq = reqAnimation(runGame);
+		
+	}
+	pause = !pause;
+}
 
-
+//hook events into button boom, pause...
 $(document).ready(function  () {
 	canvas = $('#canvas')[0];
 
@@ -234,9 +261,13 @@ $(document).ready(function  () {
 		clickStopGame();
 	});
 
+	$('#pause').click(function(event) {
+		clickPause();
+	});
+
 	$('#restart').click(function  () {
 		startGame();
-	})
+	});
 	$('#boom').click(function(event) {
 		clickBoom();
 	});

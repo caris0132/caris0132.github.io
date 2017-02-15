@@ -6,7 +6,7 @@
 	<title>Trang Chu</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style_calendar.css">
-	<script src="js/application.js" type="text/javascript" charset="utf-8" async defer></script>
+	
 </head>
 <body onload="load_calendar()">
 	<form action="login.php" method="post" accept-charset="utf-8" onsubmit="return check_validate()">
@@ -34,7 +34,7 @@
 					<div id="result" onclick="show_calendar()">
 						<input type="text" name="day-of-birth" id="day-of-birth" value="" placeholder="">
 					</div>
-					<div id="content-calendar">
+					<div id="content-calendar" style="display:none">
 						<div id="feature-calendar">
 							<div class="item" id="bottom" onclick="preview_year()">
 							</div>
@@ -78,12 +78,14 @@
 						</div>
 					</div>
 				</div>
+				<p class="error" id="err_date"></p>
 			</div>
 			<div id="feature">
-				<input type="submit" name="submit" value="SUBMIT">
-				<input type="button" name="refersh" value="REFERSH" onclick="check_validate()">
+				<input type="button" name="submit" value="SUBMIT" id="submit">
+				<input type="button" name="refersh" value="REFERSH" id="refersh">
 			</div>
 		</div>
 	</form>
+	<script src="js/application.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>

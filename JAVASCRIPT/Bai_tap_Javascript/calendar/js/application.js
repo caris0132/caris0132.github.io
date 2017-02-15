@@ -29,7 +29,11 @@ function load_select_month() {
     };
 }
 
-
+/**
+ * load all date on month and create all button contain date value
+ * @param  {Date}   date first date on month if null date is date now
+ * @return {void}      show all date into calendar.
+ */
 function load_date_on_month(date = new Date()) {
     var day_on_month       = document.getElementById('day-on-month');
     day_on_month.innerHTML = "";
@@ -72,6 +76,7 @@ function load_date_on_month(date = new Date()) {
 
 }
 
+//change calendar when change select date or select year
 function change_calendar() {
     var month = document.getElementById('month').value;
     var year = document.getElementById('year').value;
@@ -80,6 +85,8 @@ function change_calendar() {
     add_event_click_on_date();
 }
 
+
+//handle event click next month button and change calendar
 function next_month() {
     var month = document.getElementById('month');
     if (month.value < 11) {
@@ -89,6 +96,7 @@ function next_month() {
 
 }
 
+//handle event click preview month button and change calendar
 function preview_month() {
     var month = document.getElementById('month');
     if (month.value > 0) {
@@ -97,6 +105,7 @@ function preview_month() {
     change_calendar();
 }
 
+//handle event click next year button and change calendar
 function next_year() {
     var year = document.getElementById('year');
     if (year.value < max_year) {
@@ -105,6 +114,7 @@ function next_year() {
     change_calendar();
 }
 
+//handle event click preview year button and change calendar
 function preview_year() {
     var year = document.getElementById('year');
     if (year.value > min_year) {
@@ -112,11 +122,15 @@ function preview_year() {
     }
     change_calendar();
 }
+
+//get and show date on input result
 function select_date (opj) {
     var date = opj.getElementsByTagName('p')[0].innerHTML;
     var result = document.getElementById('result');
     result.getElementsByTagName('input')[0].value = date;
 }
+
+//handle event click  each date on calendar
 function add_event_click_on_date () {
     var date = document.getElementsByClassName('date');
     for (var i = 0; i < date.length; i++) {
@@ -127,10 +141,11 @@ function add_event_click_on_date () {
                 var year = document.getElementById('year').value;
                 result.getElementsByTagName('input')[0].value = value_date + "/" + month + "/" + year;
                 document.getElementById('content').style.display="none";
-            }
+            };
         }
 }
 
+//show or hide calendar when click field result
 function show_calendar() {
     var carlendar = document.getElementById('content');
     if (carlendar.style.display == "none")
@@ -139,6 +154,7 @@ function show_calendar() {
         carlendar.style.display = "none";
 }
 
+//add info year , month and load all date on month on web site , add event click date
 function load_calendar() {
     load_select_year();
     load_select_month();

@@ -3,6 +3,8 @@ var result;
 var select_year;
 var select_month;
 var date_on_month;
+
+
 $(document).ready(function() {
 	calendar = $('.calendar');
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
 		'box-sizing': 'border-box',
 		float: 'left'
 	});
-
+	// create button next, preview year, next,preview month
 	var pre_year = $('<input/>');
 	pre_year.attr('type', 'button');
 	pre_year.addClass('pre-year item');
@@ -54,6 +56,7 @@ $(document).ready(function() {
 	result = $('<div></div>');
 	result.addClass('result');
 
+	//add all button , select year,month into calendar
 	calendar.append(result);
 	calendar.append(pre_year);
 	calendar.append(pre_month);
@@ -61,24 +64,29 @@ $(document).ready(function() {
 	calendar.append(select_year);
 	calendar.append(next_month);
 	calendar.append(next_year);
+
+	//add date and day into calendar
 	calendar.append(createDayOnWeek());
 	calendar.append(loadDateOnMonth());
 
+	//handle event change month in calendar
 	select_month.change(function  () {
 		date_on_month.remove();
 		calendar.append(loadDateOnMonth());
 		$('.calendar *').css('display', 'inline-block');
 	});
+
+	//handle event change month in calendar
 	select_year.change(function(event) {
 		date_on_month.remove();
 		calendar.append(loadDateOnMonth());
 		$('.calendar *').css('display', 'inline-block');
 	});
 
+	//handle click button  in calendar (button next or preview year, next or preview month )
 	$("input[type='button']").click(function(event) {
 		var check = parseInt(select_month.val()) > 0;
 		var check2 = $(this).attr('class') == 'pre-month item';
-		debugger
 		if($(this).attr('class') == 'btn_next_month' && parseInt(select_month.val()) <11) {
 			select_month.val(parseInt(select_month.val()) + 1) ;
 			date_on_month.remove();
@@ -102,20 +110,22 @@ $(document).ready(function() {
 		
 		$('.calendar *').css('display', 'inline-block');
 	});
+	//handle click into date and print date into input result
 	$('.date').click(function  () {
-		debugger
 		var date = parseInt($(this).text());
 		var result_date = date + '/' + (parseInt(select_month.val())+1) +'/' + select_year.val();
 		result.text(result_date);
 		$('.calendar *').css('display', 'none');
 	});
 
+	//handle click field result if clicked then show calendar
 	result.click(function(event) {
 		$('.calendar *').css('display', 'inline-block');
 	});
 
 });
 
+//create selector select Month
 function createSelectMonth () {
 	select_month = $('<select></select>');
 	for (var i = 0; i < 12; i++) {
@@ -124,6 +134,8 @@ function createSelectMonth () {
 	}
 	return select_month;
 }
+
+//create selector select Year
 function createSelectYear () {
 	var date = new Date();
 	date.getFullYear()
@@ -134,6 +146,10 @@ function createSelectYear () {
 	} 
 	select_year.val(new Date().getFullYear()) ;
 }
+/**
+ * create day on week
+ * @return {array} list day on week
+ */
 function createDayOnWeek () {
 	var day_on_week = $('<div></div>');
 	var ls_day_on_week = new Array('Sun','Mon','Tue','Web','Thu','Fri','Sat');
@@ -143,6 +159,11 @@ function createDayOnWeek () {
 	select_month.val(new Date().getMonth());
 	return day_on_week;
 }
+
+/**
+ * load all date on month
+ * @return {void} load and show all date into calendar
+ */
 function loadDateOnMonth () {
 	date_on_month = $('<div></div>');
 	date_on_month.addClass('date-on-month');
