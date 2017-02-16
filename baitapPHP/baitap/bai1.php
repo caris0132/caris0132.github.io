@@ -10,36 +10,82 @@
 function funExercise($arr1, $arr2, $arr3)
 {
     try {
-        if (array_search(1, $arr1)) {
-            echo 'Found';
-        } else {
-            echo(array_search(1, $arr1));
-            echo 'Not found';
+        $error = array();
+        if (!is_array($arr1)) {
+            array_push($error, 1);
         }
-        $result = array_unique(array_merge($arr2, $arr3));
-        echo '<br>' . implode(', ', $result);
-        echo '<br>';
-        array_walk($result, function ($value) {
-            if (strlen($value) % 2 == 0) {
-                echo "$value, ";
-            }
+        if (!is_array($arr2)) {
+            array_push($error, 2);
+        }
+        if (!is_array($arr2)) {
+            array_push($error, 3);
+        }
+        if (count($error) > 0) {
+            throw new logicException("Invalid parameter " . implode(', ', $error));
 
-        });
+        }
 
-        echo '</br>';
-        sort($arr1);
-        var_dump($result);
-        var_dump(array_intersect_key($arr1, $result));
-        echo implode(', ', array_intersect_key($arr1, $result));
-        echo '</br>'.'///';
+        // found item in array . if found echo 'Found' else echo 'Not Found'
+        foundItemInArray(1, $arr1);
+        $arrayMergeUnique = array_unique(array_merge($arr2, $arr3));
+        echo "</br>";
+        print_r($arrayMergeUnique);
 
-        rsort($arr1);
-        echo implode(', ', array_diff_key($arr1, $result));
+        //check total digit value has divisible 2 or not
+        $arrNumDivisible2 = array_filter($arrayMergeUnique, 'totalDigitDivisible2');
+        echo "</br>";
+        print_r($arrNumDivisible2);
+
+        //print all item $arr1 exits $arrayMergeUnique
+        $result = array_intersect($arr1, $arrayMergeUnique);
+        echo "</br>";
+        sort($result);
+        print_r($result);
+
+        ////print all key item $arr1 not exits $arrayMergeUnique
+        $result = array_diff_key($arr1, $arrayMergeUnique);
+        arsort($result);
+        echo "</br>";
+        print_r($result);
+
     } catch (logicException $e) {
-        error_log('message');
+        error_log($e->getMessage(), 0);
     }
 }
-$arr1 = array(2, 5, 3);
+
+/**
+ * found item in array . if found echo 'Found' else echo 'Not Found'
+ * @param  array $array specifies array to search
+ * @param  [type] $item  specifies the what to search for
+ * @return void        echo 'Found' if the value is found in the array, else echo 'not found'
+ */
+function foundItemInArray($item, $array)
+{
+    echo in_array($item, $array) ? 'Found' : 'Not found';
+}
+
+/**
+ * check total digit value has divisible 2 or not
+ * @param  numecric $value specifies numeric to check
+ * @return booleam        return true if total digit disvisible 2 else return false
+ */
+function totalDigitDivisible2($value)
+{
+    if (is_numeric($value)) {
+        $value = str_split($value);
+        $sumDigit = array_sum($value);
+        if ($sumDigit % 2 == 0) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+$arr1 = array(1, 2, 5, 3, 'a' => 22, 'b' => 3);
 $arr2 = array(111, 33, 22, 2, 3);
 $arr3 = array(23, 44, 12, 5, 3);
+var_dump($arr1);
+var_dump($arr2);
+var_dump($arr3);
 funExercise($arr1, $arr2, $arr3);

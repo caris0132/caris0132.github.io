@@ -11,9 +11,9 @@
  */
 $array1 = array("a" => "Horse", "b" => "Cat", "c" => "Dog");
 $array2 = array("d" => "Cow", "a" => "Cat", "e" => "elephant");
-$array3 = array('a' => "c ho","c" =>"tiger" );
+$array3 = array('a' => "c ho", "c" => "tiger");
 
-print_r(array_merge_recursive($array1, $array2,$array3));
+print_r(array_merge($array1, $array2, $array3));
 echo "<br>";
 /**
  * array + array

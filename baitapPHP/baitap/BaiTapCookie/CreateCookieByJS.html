@@ -9,12 +9,24 @@
 <body>
 	<p id='result'></p>
 	<script type="text/javascript">
+		/**
+		 * set cookie
+		 * @param {string} cName  cookie name
+		 * @param {string} cValue cookie value
+		 * @param {int} exDay  exprire day of cookie
+		 */
 		function setCookie (cName, cValue, exDay) {
 			var day = new Date();
 			day.setTime(day.getTime() + exDay * 24 * 60 * 60 * 1000);
 			var expires = 'expires=' + day.toUTCString();
 			document.cookie = cName + '=' + cValue + '=' + expires;
 		}
+
+		/**
+		 * get cookie by cookie name
+		 * @param  {string} cName name cookie
+		 * @return {void}       value of  cookie
+		 */
 		function getCookie (cName) {
 			var arrCookie = document.cookie.split(';');
 			for (var i = 0; i < arrCookie.length; i++) {

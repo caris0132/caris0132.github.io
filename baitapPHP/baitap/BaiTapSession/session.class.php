@@ -1,5 +1,6 @@
 <?php
-class session {
+class session
+{
     public function __construct()
     {
         session_set_save_handler(
@@ -12,7 +13,7 @@ class session {
         );
         register_shutdown_function('session_write_close');
     }
-    public function session_start($session_name, $secure)
+    public function sessionStart($session_name, $secure)
     {
         // Make sure the session cookie is not accessable via javascript.
         $httponly = true;
@@ -37,18 +38,18 @@ class session {
         // Change the session name
         session_name($session_name);
         // Now we cat start the session
-        session_start();
+        sessionStart();
         // This line regenerates the session and delete the old one.
         // It also generates a new encryption key in the database.
         session_regenerate_id(true);
     }
     public function open()
     {
-        $host     = 'localhost';
-        $user     = 'root';
-        $pass     = '';
-        $name     = 'secure_session';
-        $mysqli   = new mysqli($host, $user, $pass, $name);
+        $host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $name = 'secure_session';
+        $mysqli = new mysqli($host, $user, $pass, $name);
         $this->db = $mysqli;
         return true;
     }
@@ -67,10 +68,16 @@ class session {
         $this->read_stmt->store_result();
         $this->read_stmt->bind_result($data);
         $this->read_stmt->fetch();
-        $key  = $this->getkey($id);
+        $key = $this->getkey($id);
         $data = $this->decrypt($data, $key);
         return $data;
     }
+    /**
+     * // write session data to the database.
+     * @param  string $id   $id session
+     * @param  [type] $data data of session
+     * @return boolean       return true if session data is write
+     */
     public function write($id, $data)
     {
         // Get unique key
@@ -87,6 +94,10 @@ class session {
         $this->w_stmt->execute();
         return true;
     }
+    /**
+     * destroy session DB
+     * @return boolean return true when destroy session
+     */
     public function destroy()
     {
         if (!isset($this->delete_stmt)) {
@@ -125,19 +136,19 @@ class session {
     }
     private function encrypt($data, $key)
     {
-        $salt      = 'cH!swe!retReGu7W6bEDRup7usuDUh9THeD2CHeGE*ewr4n39=E@rAsp7c-Ph@pH';
-        $key       = substr(hash('sha256', $salt . $key . $salt), 0, 32);
-        $iv_size   = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-        $iv        = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $salt = 'cH!swe!retReGu7W6bEDRup7usuDUh9THeD2CHeGE*ewr4n39=E@rAsp7c-Ph@pH';
+        $key = substr(hash('sha256', $salt . $key . $salt), 0, 32);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         $encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $data, MCRYPT_MODE_ECB, $iv));
         return $encrypted;
     }
     private function decrypt($data, $key)
     {
-        $salt      = 'cH!swe!retReGu7W6bEDRup7usuDUh9THeD2CHeGE*ewr4n39=E@rAsp7c-Ph@pH';
-        $key       = substr(hash('sha256', $salt . $key . $salt), 0, 32);
-        $iv_size   = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
-        $iv        = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $salt = 'cH!swe!retReGu7W6bEDRup7usuDUh9THeD2CHeGE*ewr4n39=E@rAsp7c-Ph@pH';
+        $key = substr(hash('sha256', $salt . $key . $salt), 0, 32);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
         $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, base64_decode($data), MCRYPT_MODE_ECB, $iv);
         return $decrypted;
     }
