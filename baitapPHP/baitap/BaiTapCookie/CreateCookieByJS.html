@@ -5,9 +5,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title></title>
 	<link rel="stylesheet" href="">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
+	<input type="text" name="name_cookie" value="" placeholder="name cookie" id="name_cookie">
+	<input type="text" name="value_cookie" value="" placeholder="value cookie" id="value_cookie">
+	<input type="number" name="exprire_cookie" value="" placeholder="exprire day cookie" id="exprire_cookie"> day
+	<button type="button" id="create-cookie" >Create</button>
 	<p id='result'></p>
+
+
 	<script type="text/javascript">
 		/**
 		 * set cookie
@@ -19,7 +26,7 @@
 			var day = new Date();
 			day.setTime(day.getTime() + exDay * 24 * 60 * 60 * 1000);
 			var expires = 'expires=' + day.toUTCString();
-			document.cookie = cName + '=' + cValue + '=' + expires;
+			document.cookie = cName + ' = ' + cValue + ' = ' + expires;
 		}
 
 		/**
@@ -40,8 +47,21 @@
 			};
 			return ;
 		}
-		setCookie('cookieJavascipt', 'create cookie by javascript', 3);
-		document.getElementById('result').innerHTML = 'Cookie:' + 'cookieJavascipt' + getCookie('cookieJavascipt');
+		$('#create-cookie').click(function (evt) {
+			var cName = $('#name_cookie').val();
+			cName = escape(cName);
+			cValue = escape(cValue);
+			var cValue = $('#value_cookie').val();
+			var exDay = $('#exprire_cookie').val();
+
+			if (cName ) {
+				setCookie(cName, cValue, exDay);
+				$('#result').text(cName + getCookie(cName));
+				console.log(document.cookie.split(';'));
+			} else {
+				console.log('dont create cookie!!');
+			}
+		})
 	</script>
 </body>
 </html>

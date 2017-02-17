@@ -9,15 +9,16 @@
 	<script type="text/javascript">
 		function loadAjax () {
 			var formData = new FormData();
+			var data = $('#data').val();
 			//formData.append('data', $('#data').val() + '');
 			//request result.php get data and alert data
 			$.ajax({
 				url : 'result.php',
 				type : 'post',
-				data : {'data' : $('#data').val()},
+				data : {'data' : data},
                 mimeType:"multipart/form-data",
 				success : function  (result) {
-					alert(result);
+					$('#result').text(result);
 				},
 			});
 		}
@@ -26,6 +27,9 @@
 <body>
 		<input type="text" name="data" value="" placeholder="Enter Data Ajax" id="data">
 		<input type="button" name="loadAjax" value="demoLoadAjax" onclick="loadAjax()">
+		<p id="result">
+		</p>
+
 	
 </body>
 </html>

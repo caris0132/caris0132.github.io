@@ -1,7 +1,9 @@
 <?php
 
-if (isset($_POST['data'])) {
-    echo ' Data request:' . $_REQUEST['data'];
+if (!empty($_POST['data'])) {
+	$data = $_POST['data'];
+	$data = htmlentities($data);
+	echo 'response: ' . $data;
 } else {
-    echo 'chưa nhập trường data';
+	echo 'chưa nhập trường data';
 }
