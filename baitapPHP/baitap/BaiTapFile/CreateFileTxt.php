@@ -12,30 +12,31 @@
 		<input type="text" name="namefile" value="" placeholder="enter name file">
 		<textarea name="file_content"></textarea>
 		<div id="content-file">
-			
+
 		</div>
 		<input type="submit" name="submit" value="Write file">
 	</form>
 </body>
-<?php 
-if (isset($_POST['submit'])) {
-	$contentFile = $_POST['file_content'];
-	$filename = $_POST['namefile'] ? $_POST['namefile'] :'' ;
-	$extension = '.txt';
-	$upload_dir = 'images/';
-	if (!empty($contentFile) && !empty($filename)) {
-		
-		$filename = $upload_dir . $filename . $extension;
-		$file = fopen($filename, 'w+');
-		if ($file) {
-			fwrite($file, $contentFile);
-			echo 'ghi file thanh cong';
-			echo '<br>' . 'noi dung file' . '<br>';
-			echo file_get_contents($filename);
-			fclose($file);
-		}
+<?php
 
-	}
+if (isset($_POST['submit'])) {
+    $contentFile = $_POST['file_content'];
+    $filename = $_POST['namefile'] ? $_POST['namefile'] : '';
+    $extension = '.txt';
+    $upload_dir = 'images/';
+    if (!empty($contentFile) && !empty($filename)) {
+
+        $filename = $upload_dir . $filename . $extension;
+        $file = fopen($filename, 'w+');
+        if ($file) {
+            fwrite($file, $contentFile);
+            echo 'ghi file thanh cong';
+            echo '<br>' . 'noi dung file' . '<br>';
+            echo file_get_contents($filename);
+            fclose($file);
+        }
+
+    }
 }
- ?>
+?>
 </html>
