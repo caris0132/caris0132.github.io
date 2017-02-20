@@ -118,10 +118,14 @@ function monsters_click (x,y) {
 			savehightScore();
 			console.log(sessionStorage.hightScore);
 			loadInfoGame();
+			checkGameWin();
 			return;
 		}
 		
 	};
+	if(stop) {
+		return;
+	}
 	point -= 50;
 	heart--;
 	if(checkGameOver()) {
@@ -177,9 +181,11 @@ function startGame () {
 }
 function checkGameWin () {
 	if(listMonster.length ==0) {
-		alert("win");
 		lever++;
 		addMonsterByLever();
+		stop =false;
+		cancelAnimation(myReq);
+		myReq = reqAnimation(runGame);
 		return true;
 	}
 	return false;
@@ -187,9 +193,9 @@ function checkGameWin () {
 function  checkGameOver () {
 	if(heart == 0) {
 		context.clearRect( 0, 0, canvas.width, canvas.height);
-		context.font="40px Georgia";
+		context.font="30px Georgia";
 		context.textAlign = 'center';
-		context.fillText("Game Over!",canvas.width/2,canvas.height/2);
+		context.fillText("Game Over! Click Restart game!",canvas.width/2,canvas.height/2);
 		return true;
 	}
 	return false;

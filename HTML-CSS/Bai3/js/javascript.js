@@ -1,5 +1,6 @@
 function show_info_trailer (item_id) {
 	var x = document.getElementById(item_id);
+	debugger
 	var y = document.getElementById('info-'+item_id);
 	var icon_arrow = x.getElementsByClassName("arrow")[0];
 	if(y.style.display != "none")

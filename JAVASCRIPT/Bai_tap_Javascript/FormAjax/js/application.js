@@ -235,6 +235,7 @@ function check_validate() {
     var error = false;
     if (username == '' || username.length < 8 ){
         document.getElementById('err_username').innerHTML = "username length min 8 letter";
+
         error = true;
     }
     else {
@@ -243,6 +244,7 @@ function check_validate() {
     if (password.length < 8 || password == '') {
         document.getElementById('err_password').innerHTML = "password length min 8 letter";
         error = true;
+
     }
     else
     {
@@ -259,11 +261,12 @@ function check_validate() {
     if (!date) {
         document.getElementById('err_date').innerHTML = "date is empty";
         error = true;
+
     }
     else
     {
         document.getElementById('err_date').innerHTML = "";
-        error = true;
+        error = false;
     }
     console.log(error)
     return !error;
@@ -282,7 +285,15 @@ for (var i = 0; i < input.length; i++) {
 
 //check validate 
 setInterval(function () {
-    check_validate();
+    var submit = document.getElementById('submit');
+    
+    
+    if (check_validate()) {
+        submit.removeAttribute("disabled");
+        console.log('aa');
+    } else {
+        submit.setAttribute('disabled', 'disabled');
+    }
 })
 
 //handle click button refersh all field pass, email , username
@@ -292,6 +303,7 @@ refersh.onclick = function () {
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
     document.getElementById('email').value = '';
+    document.getElementById('day-of-birth').value = '';
     // refersh error
     document.getElementById('err_username').innerHTML = '';
     document.getElementById('err_password').innerHTML = '';
@@ -301,11 +313,11 @@ refersh.onclick = function () {
 }
 
 
-//handle form Ajax 
+//handle form Ajax when click submit
 document.getElementById('submit').onclick = function () {
     
     if (check_validate()) {
-        return;
+        return false;
     }
     var xmlhttp;
     var formDT = new FormData();

@@ -50,10 +50,10 @@ body {
 	font-size:1em;
 }
 .facts-content ul {
-	list-style:inside url("../images/stars.gif")
+	list-style:inside url("../images/stars.gif");
+	padding-left: 3em;
 }
 .facts-content li {
-	text-indent:10px;
 	margin-left:-10px;
 }
 .comment {
@@ -65,9 +65,13 @@ body {
 .comment-content {
 	background-color:#ECECEC;
 	padding:0.1em;
+	margin-left: 0.1em;
 	line-height:0.3em;
 	min-height:3em;
 	posittion:relative;
+}
+.comment-content p {
+	padding-left: 0.2em;
 }
 .comment-info {
 	background: url(../images/comment_bg.gif) no-repeat left top;
@@ -115,5 +119,10 @@ textarea {
 	resize:none;
 }
 	
+.text-align {
+	text-align: center;
+	-webkit-margin-after: 0;
+}
+}
 	
 	

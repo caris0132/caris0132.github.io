@@ -30,7 +30,6 @@ function Monster(img_rsc, cx, cy, imgWidth, imgHeight) {
 Monster.prototype.draw = function() {
     this.img.src = this.img_src;
     context.drawImage(this.img, this.cx, this.cy, this.imgWidth, this.imgHeight);
-    alert('daa');
 }
 Monster.prototype.move = function() {
     context.clearRect(this.cx, this.cy, this.imgWidth, this.imgHeight);
@@ -44,33 +43,42 @@ Monster.prototype.move = function() {
 };
 //--- function auto move for monster-
 function update() {
+    console.log('run');
     if (start == false || stop == true) {
         if (checkGameWin()) {
             lever++;
             addMonsterByLever();
             alert("Win");
+
         }
-        return;
+        return myReq = reqAnimation(update);
     }
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (var i = monstersls.monsters.length - 1; i >= 0; i--) {
         monstersls.monsters[i].cx += monstersls.monsters[i].speedX;
         monstersls.monsters[i].cy += monstersls.monsters[i].speedY;
-        if (monstersls.monsters[i].cx < 0 || monstersls.monsters[i].cx > canvas.width) monstersls.monsters[i].speedX = -monstersls.monsters[i].speedX;
-        if (monstersls.monsters[i].cy < 0 || monstersls.monsters[i].cy > canvas.height) monstersls.monsters[i].speedY = -monstersls.monsters[i].speedY;
+        if (monstersls.monsters[i].cx < 0 || monstersls.monsters[i].cx > canvas.width - monstersls.monsters[i].imgWidth ) monstersls.monsters[i].speedX = -monstersls.monsters[i].speedX;
+        if (monstersls.monsters[i].cy < 0 || monstersls.monsters[i].cy > canvas.height - monstersls.monsters[i].imgHeight) monstersls.monsters[i].speedY = -monstersls.monsters[i].speedY;
     };
     savehightScore(point);
     monstersls.drawMonterList();
     if (checkGameOver()) {
         //cancelAnimation(myReq);
         start = false;
-        alert("game over");
+        console.log('lose');
+        context.clearRect(0,0,canvas.width,canvas.height);
+        context.fillStyle="#FF0000";
+        context.font="20px Georgia";
+        context.textAlign = 'center';
+        context.fillText("Game Over ! Click restart game!",canvas.width/2,canvas.height/2);
+        cancelAnimation(myReq);
         return;
     }
     if (checkGameWin()) {
         lever++;
         addMonsterByLever();
         alert("Win");
+        stop = false;
     }
     savehightScore();
     updateHightScore();
@@ -135,6 +143,7 @@ function monsters_click(x, y) {
         savehightScore();
         console.log(sessionStorage.hightScore);
         updateHightScore();
+        checkGameWin();
     } else {
         point -= 50;
         heart--;
@@ -167,7 +176,7 @@ function pauseGame() {
     } else {
         start = true;
         btn_pause.style.backgroundImage = "url(images/icon_pause.jpg)";
-        reqAnimation(update);
+        //reqAnimation(update);
     }
 }
 
@@ -177,6 +186,7 @@ function stopGame() {
         num_stop--;
         var num_stop_id = document.getElementById('num-stop');
         num_stop_id.innerHTML = num_stop;
+
     } else {
         stop = false;
         reqAnimation(update);
@@ -214,13 +224,20 @@ function checkGameWin() {
     if (monstersls.monsters.length <= 0) {
         stop = false;
         return true;
+
     }
     return false;
 }
 
 function addMonsterByLever() {
     for (var i = 0; i < lever; i++) {
-        monstersls.addMonster(img_src, Math.random() * canvas.width, Math.random() * canvas.height, 50, 50);
+        var widthMonster = Math.random() * canvas.width;
+        var heightMonster = Math.random() * canvas.height;
+        if(widthMonster > canvas.width - 50)
+            widthMonster = canvas.width - 50;
+        if(heightMonster > canvas.height - 50)
+            heightMonster = canvas.height - 50;
+        monstersls.addMonster(img_src,widthMonster, heightMonster, 50, 50);
         monstersls.monsters[i].speedX *= lever;
         monstersls.monsters[i].speedY *= lever;
     };
@@ -244,3 +261,4 @@ canvas.addEventListener('click', function(evt) {
 }, false);
 var total_point = document.getElementById('menu-game').innerHTML == "<p>" + point + "</p>";
 var btn_pause = document.getElementById('pause');
+startGame();

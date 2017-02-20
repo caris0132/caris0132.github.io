@@ -145,6 +145,6 @@ $('#btn-refresh').click(function(event) {
     $('#err_password').text("");
     $('#err_email').text("");
     $('#err_date').text("");
-    $('#password').val("adada");
+    $('#password').val("");
 
 });

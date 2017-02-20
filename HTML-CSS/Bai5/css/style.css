@@ -1,3 +1,6 @@
+body {
+	background-color: #121212;
+}
 .container {
 	font-family:"time new roman";
 	font-size:16px;
@@ -23,7 +26,19 @@
 	padding:7px 0;
 	font-weight:bolder;
 	font-size:37px;
+	color: black;
 }
+span {
+	color:#7a7a7d;
+	display: inline-block;
+	background: url('../images/dot.gif') no-repeat;
+	position: relative;
+	top: 5px;
+	width:10px;
+	height: 10px;
+
+
+ }
 .menu {
 	margin-left:30px;
 	position:absolute;
@@ -120,5 +135,29 @@
 .lauch-web a {
 	text-decoration:none;
 	color:white;
+	font-size: 13px;
 }
 
+.footer {
+	width: 750px;
+    color: #7a7a7d;
+    background-color: #121212;
+    border-top: 1px dotted #7a7a7d;
+    padding-top: 20px;
+    padding-bottom: 70px;
+}
+
+.footer ul {
+	display: inline-block;
+	list-style-type: none;
+	font-size: 0.7em;
+}
+
+.footer ul li {
+	display: inline-block;
+	color: #7a7a7d;
+}
+
+.footer ul li a {
+	color: #7a7a7d;
+}
