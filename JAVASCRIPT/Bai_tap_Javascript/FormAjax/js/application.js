@@ -268,7 +268,6 @@ function check_validate() {
         document.getElementById('err_date').innerHTML = "";
         error = false;
     }
-    console.log(error)
     return !error;
 }
 
@@ -290,7 +289,6 @@ setInterval(function () {
     
     if (check_validate()) {
         submit.removeAttribute("disabled");
-        console.log('aa');
     } else {
         submit.setAttribute('disabled', 'disabled');
     }
@@ -316,7 +314,7 @@ refersh.onclick = function () {
 //handle form Ajax when click submit
 document.getElementById('submit').onclick = function () {
     
-    if (check_validate()) {
+    if (!check_validate()) {
         return false;
     }
     var xmlhttp;
