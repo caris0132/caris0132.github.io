@@ -4,6 +4,15 @@ var select_year;
 var select_month;
 var date_on_month;
 
+function dateClick() {
+	$('.date').click(function  () {
+		//$(this).addClass('curent')
+		var date = parseInt($(this).text());
+		var result_date = date + '/' + (parseInt(select_month.val())+1) +'/' + select_year.val();
+		result.text(result_date);
+		$('.calendar *').css('display', 'none');
+	});
+}
 
 $(document).ready(function() {
 	calendar = $('.calendar');
@@ -68,6 +77,8 @@ $(document).ready(function() {
 	//add date and day into calendar
 	calendar.append(createDayOnWeek());
 	calendar.append(loadDateOnMonth());
+	//add event click date input.
+	dateClick();
 
 	//handle event change month in calendar
 	select_month.change(function  () {
@@ -107,16 +118,13 @@ $(document).ready(function() {
 			date_on_month.remove();
 			calendar.append(loadDateOnMonth());
 		}
-		
+		console.log('b');
+		dateClick();
 		$('.calendar *').css('display', 'inline-block');
 	});
 	//handle click into date and print date into input result
-	$('.date').click(function  () {
-		var date = parseInt($(this).text());
-		var result_date = date + '/' + (parseInt(select_month.val())+1) +'/' + select_year.val();
-		result.text(result_date);
-		$('.calendar *').css('display', 'none');
-	});
+	
+	
 
 	//handle click field result if clicked then show calendar
 	result.click(function(event) {
@@ -168,7 +176,6 @@ function loadDateOnMonth () {
 	date_on_month = $('<div></div>');
 	date_on_month.addClass('date-on-month');
 	var first_date_on_week = new Date(1,select_month.val()-1,select_year.val()).getDay();
-	console.log(select_year.val());
 	var total_date_on_month;
 	var month = select_month.val();
 	if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11)
@@ -197,7 +204,12 @@ function loadDateOnMonth () {
             date_on_month.append("<div class='item'></div>");
 
     }
-    
+    dateClick();
 
     return date_on_month;
 }
+
+//
+jQuery(document).ready(function($) {
+	
+});

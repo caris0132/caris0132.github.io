@@ -54,6 +54,18 @@ h1,span {
 	margin: auto;
 	display: block;
 }
+
+
+/*li.menu_4 a:hover {
+    background-image: none!important;
+}*/
+.subNav a {
+    background-image: none!important;
+    text-decoration:underline;
+    font-size: 0.9em;
+}
+
+
 .title_1 {
 	padding: 0;
 	text-align: left;

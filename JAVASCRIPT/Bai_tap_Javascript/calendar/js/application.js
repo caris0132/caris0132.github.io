@@ -66,7 +66,7 @@ function load_date_on_month(date = new Date()) {
             if (date_curent && date_curent == date_on_month)
                 day_on_month.innerHTML += "<div class='item date curent'>" + "<p>" + date_on_month + "</p>" + "</div>";
             else
-                day_on_month.innerHTML += "<div class='item date'>" + "<p>" + date_on_month + "</p>" + "</div>"
+                day_on_month.innerHTML += "<div class='item date'>" + "<p>" + date_on_month + "</p>" + "</div>";
 
         }
             
@@ -139,7 +139,7 @@ function add_event_click_on_date () {
                 var result = document.getElementById('result');
                 var month = document.getElementById('month').value;
                 var year = document.getElementById('year').value;
-                result.getElementsByTagName('input')[0].value = value_date + "/" + month + "/" + year;
+                result.getElementsByTagName('input')[0].value = value_date + "/" + (Number(month) + 1) + "/" + year;
                 document.getElementById('content').style.display="none";
             };
         }
