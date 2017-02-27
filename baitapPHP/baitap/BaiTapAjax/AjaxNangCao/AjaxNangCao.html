@@ -8,28 +8,38 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		function loadAjax () {
+			console.log($('#num_a').val());
+			var numA = $('#num_a').val();
+			var numB = $('#num_b').val();
+			//check validate numA, numB if it not a number . it assign 0
+			var checkValidate = function() {
+				numA = isNaN(numA)? 0 : numA;
+				numB = isNaN(numB)? 0 : numB;
+			}();
+			//request numa , numb to host server and reponse multi , total of it
 			$.ajax({
 				url : 'result.php',
 				type : 'post',
 				dataType : 'json',
 				data : {
-					a : 1,
-					b : 2,
-					c : 3,
-					d : 4
+					a : numA,
+					b : numB
 				},
 				success : function  (result) {
 					console.log(result);
 					alert('total: ' + result.total + ' - ' + 'multi: ' + result.multi);
 				},
 				error : function  () {
-					alert('that bai');
+					alert('that bai! có lỗi xảy ra !');
 				}
 			})
 		}
 	</script>
+	
 </head>
 <body>
+	<input type="number" name="soA" value="" placeholder="Enter number a" id="num_a">
+	<input type="number" name="soB" value="" placeholder="Enter number b" id="num_b">
 	<input type="button" name="" value="loadAjax" onclick="loadAjax()">
 </body>
 </html>
