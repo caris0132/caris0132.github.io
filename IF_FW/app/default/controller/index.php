@@ -18,8 +18,8 @@ class Default_Controller_Index extends Default_Controller_Base
         $param = array(
             'title' => "ello",
         );
-        $this->view->models = $model->findAll('news');
-        $this->view->smarty->assign('data', $this->view->models);
+        //$this->view->models = $model->findAll('news');
+        $this->view->smarty->assign('data', 'hello world');
         $this->view->render('index');
 
     }
@@ -35,6 +35,7 @@ class Default_Controller_Index extends Default_Controller_Base
             'title' => "ello",
         );
         $this->view->models = $model->findAll('news');
+        $this->view->smarty->assign('data', $this->view->models);
         $this->view->render('about');
     }
     public function contact()

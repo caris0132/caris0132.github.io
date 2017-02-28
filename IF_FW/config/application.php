@@ -23,6 +23,8 @@ return array(
         'emulatePrepare' => true,
         'username' => 'root',
         'password' => '',
+        //database of session_db
+        'session_db' => 'dbframework',
         'charset' => 'utf8',
     ),
     'routers' => array(

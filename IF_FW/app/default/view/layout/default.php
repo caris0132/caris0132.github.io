@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="public/css/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?=IfdbBase::$resourceUrl?>/css/style.css" type="text/css" media="screen" />
         <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
         <title>If Project</title>
     </head>

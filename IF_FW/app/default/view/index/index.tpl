@@ -1,2 +1,2 @@
-demo.tpl
-{$data|@var_dump}
+
+<h1>{$data|escape}</h1>

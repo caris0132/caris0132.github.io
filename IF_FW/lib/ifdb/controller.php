@@ -9,6 +9,7 @@ class Ifdb_Controller
     public function __construct()
     {
         $this->view = new Ifdb_View;
+        $session = new Session_MySession();
         $log = new Log_Logfile();
         if (Ifdb::$config['logfile_status'] == 'enable') {
             $path = Ifdb::$config['basePath'] . '/' . Ifdb::$config['logfile_dir'] . '/' . Ifdb::$config['logfile'];

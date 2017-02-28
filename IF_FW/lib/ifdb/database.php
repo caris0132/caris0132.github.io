@@ -181,33 +181,25 @@ class Ifdb_Database
         return $sth->fetchAll(PDO::FETCH_OBJ);
 
     }
-    public function find($table = null, $columns = null, $condition = null, $param)
+    public function find($condition = null, $param = null)
     {
-        $sql = "select {columns} from {table}";
-        if ($table = null) {
-            $table = $this->table;
-        }
-        str_replace('{table}', $table, $sql);
-        if ($columns) {
-            $columns = "*";
-            str_replace('{columns}', $columns, $sql);
-        } else {
-            str_replace('{columns}', implode(',', $columns), $sql);
-        }
-
-        if ($condition == null) {
-            $keys = array_keys($param);
-            foreach ($keys as $key => &$value) {
-                $value = $value . ':' . $value;
+        try {
+            if ($this->table) {
+                $sql = 'select * from ' . $this->table;
+                if ($condition) {
+                    $sql .= ' where ' . $condition;
+                }
+                $sth = $this->conn->prepare($sql);
+                $sth->execute($param);
+                return $sth->fetch(PDO::FETCH_OBJ);
+            } else {
+                throw new Exception('Table not found!');
+                return false;
             }
-            $sql .= ' where ' . implode(' and ', $keys);
-        } else {
-
+        } catch (PDOException $e) {
+            throw new Exception('Wrong sql!');
+            return false;
         }
-        $sth = $this->conn->prepare($sql);
-        $sth->execute($param);
-        return $sth->fetch(PDO::FETCH_OBJ);
-
     }
 
 }
